@@ -20,13 +20,27 @@ $dropOption.change(function (e) { //event handler showing/hiding input field whe
 })
 
 // T-Shirt
-let $color = $('#color'); 
-let $colorText = $("<option>Please select a T-shirt theme</option>");
-$colorText.attr('value','color-text');
+let $color = $('#color'); //list of color options
+let $design = $('#design');
+let $colorText = $("<option>Please select a T-shirt theme</option>"); //inserted option item to prompt user to select theme
+$colorText.attr('value', 'color-text'); // seting value of attr
 
-$color.prepend($colorText);
-$colorText.attr('selected','true');
-
- 
+$color.prepend($colorText); //prepending to color option list
+$colorText.attr('selected', 'true'); //selecting option item to show first when page loads  
 
 
+$color.find('option').not(':first').hide(); //hides all color options except first option
+
+$design.change( function(e){
+
+if($('#design [value="js pun"]')===$(e.target).val()){
+
+    $('#color :nth-child(-n+4)').show();
+
+
+}else{
+    $('#color :nth-child(-n-3)').show();
+
+}
+
+})

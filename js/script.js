@@ -28,19 +28,24 @@ $colorText.attr('value', 'color-text'); // seting value of attr
 $color.prepend($colorText); //prepending to color option list
 $colorText.attr('selected', 'true'); //selecting option item to show first when page loads  
 
+$design.on('click', function(){ //event handler hides select theme option
+$('#design :first').hide();
 
+})
 $color.find('option').not(':first').hide(); //hides all color options except first option
 
-$design.change( function(e){
+$design.on('click', function(){
 
-if($('#design [value="js pun"]')===$(e.target).val()){
+if($('#design [value="js puns"]')) {
 
-    $('#color :nth-child(-n+4)').show();
+    $('#color :nth-child(1n-3)').show();
+
+  
+   
+
+}   
 
 
-}else{
-    $('#color :nth-child(-n-3)').show();
 
-}
 
 })

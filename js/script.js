@@ -1,5 +1,11 @@
-const $other = $("#other-title");
-const $dropOption = $("#title");
+let $other = $("#other-title");
+let $dropOption = $("#title");
+let $cornFlowerBlue = $('#color option[value="cornflowerblue"]'); 
+let $darkSlateGrey = $('#color option[value="darkslategrey"]');
+let $gold = $('#color option[value="gold"]');
+let $tomato = $('#color option[value="tomato"]');
+let $steelBlue = $('#color option[value="steelblue"]');
+let $dimGrey = $('#color option[value="dimgrey"]');
 
 const $name = $("#name").focus(); //starts cursor in Name input upon loading
 
@@ -28,22 +34,34 @@ $colorText.attr('value', 'color-text'); // seting value of attr
 $color.prepend($colorText); //prepending to color option list
 $colorText.attr('selected', 'true'); //selecting option item to show first when page loads  
 
-$design.on('click', function(){ //event handler hides select theme option
+$design.change( function(){ //event handler hides select theme option
 $('#design :first').hide();
 
 })
-$color.find('option').not(':first').hide(); //hides all color options except first option
+ $color.find('option').not(':first').hide(); //hides all color options except first option
 
-$design.on('click', function(){
+$design.change( function(){  //event handler, listening for design selection, showing corresponding colors
 
-if($('#design [value="js puns"]')) {
 
-    $('#color :nth-child(1n-3)').show();
+if($(this.val()) === 'js puns' ){
+    $cornFlowerBlue.show();
+    $gold.show();
+    $darkSlateGrey.show();
+  
+
 
   
-   
+} else if ($(this.val()==='heart js')){
 
-}   
+   
+    $tomato.show();
+    $steelBlue.show();
+    $dimGrey.show();
+
+}
+
+
+
 
 
 

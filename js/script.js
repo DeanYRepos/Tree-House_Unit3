@@ -69,3 +69,21 @@ $design.change(function () { //event handler, listening for design selection, sh
     }
 
 })
+
+//Activity Section
+
+let $newDiv = $("<div></div>");
+let $activityClass = $(".activities");
+let $activityClass_Div = $(".activities").append($newDiv);
+let ActivityCostTotal = 0;
+
+$activityClass.change(function(){
+    
+    let $this = $(this);
+
+    console.log(this);  
+
+    
+
+
+})

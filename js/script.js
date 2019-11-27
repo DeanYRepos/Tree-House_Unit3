@@ -72,18 +72,30 @@ $design.change(function () { //event handler, listening for design selection, sh
 
 //Activity Section
 
-let $newDiv = $("<div></div>");
+let $newDiv = $("<div>Total Cost: $</div>");
 let $activityClass = $(".activities");
 let $activityClass_Div = $(".activities").append($newDiv);
-let ActivityCostTotal = 0;
+let activityCostTotal = 0;
 
-$activityClass.change(function(){
+$activityClass.change(function(e){
     
-    let $this = $(this);
+    let $target = $(e.target);
 
-    console.log(this);  
+     console.log($target);  
+     let $dataCost = parseInt($target.attr('data-cost').slice(-3)); //parsing the input clicked to an integer
+   
+    console.log($dataCost);
+if($target.is(':checked')){ // activity will be added/subtracted if checked/unchecked
 
-    
+activityCostTotal+= $dataCost;
+
+
+}else {
+activityCostTotal -= $dataCost;
+
+
+}
+$('.activities div').text('Total Cost: $'+ activityCostTotal); //concatinating total cost of activities to div string
 
 
 })

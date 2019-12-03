@@ -77,25 +77,33 @@ let $activityClass = $(".activities");
 let $activityClass_Div = $(".activities").append($newDiv);
 let activityCostTotal = 0;
 
-$activityClass.change(function(e){
-    
+
+$activityClass.change(function (e) {
     let $target = $(e.target);
-
-     console.log($target);  
-     let $dataCost = parseInt($target.attr('data-cost').slice(-3)); //parsing the input clicked to an integer
+    let $dateANdTime = $target.attr('data-day-and-time');
+    let $dataCost = parseInt($target.attr('data-cost').slice(-3)); //parsing the input clicked to an integer
    
+    console.log($target);
+    console.log($dateANdTime);
+
+
     console.log($dataCost);
-if($target.is(':checked')){ // activity will be added/subtracted if checked/unchecked
+    for (let i = 1; i < $target.length; i++) {
+        let $input = $target.eq(i);
+        console.log($input);
+        if ($input.prop('checked')) { // activity will be added/subtracted if checked/unchecked
 
-activityCostTotal+= $dataCost;
-
-
-}else {
-activityCostTotal -= $dataCost;
-
-
-}
-$('.activities div').text('Total Cost: $'+ activityCostTotal); //concatinating total cost of activities to div string
+            activityCostTotal += $dataCost;
 
 
+        } else if($input.prop('checked') === 'fasle' ) {
+            activityCostTotal -= $dataCost;
+
+
+        }
+        
+
+
+    }
+    $('.activities div').html('<div>Total Cost: $' + activityCostTotal + '</div>'); //concatinating total cost of activities to div string
 })

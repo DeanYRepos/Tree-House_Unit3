@@ -80,30 +80,51 @@ let activityCostTotal = 0;
 
 $activityClass.change(function (e) {
     let $target = $(e.target);
-    let $dateANdTime = $target.attr('data-day-and-time');
+    let $dateAndTime = $target.attr('data-day-and-time');
     let $dataCost = parseInt($target.attr('data-cost').slice(-3)); //parsing the input clicked to an integer
-   
+
     console.log($target);
-    console.log($dateANdTime);
+    console.log($dateAndTime);
 
 
     console.log($dataCost);
-    for (let i = 1; i < $target.length; i++) {
-        let $input = $target.eq(i);
-        console.log($input);
-        if ($input.prop('checked')) { // activity will be added/subtracted if checked/unchecked
 
-            activityCostTotal += $dataCost;
+    if ($target.prop('checked')) {
+
+        activityCostTotal += $dataCost;
 
 
-        } else if($input.prop('checked') === 'fasle' ) {
-            activityCostTotal -= $dataCost;
+    } else
+        activityCostTotal -= $dataCost;
 
 
-        }
-        
 
 
-    }
+
+
+
     $('.activities div').html('<div>Total Cost: $' + activityCostTotal + '</div>'); //concatinating total cost of activities to div string
+
+    let $inputIterations = $('.activities input');
+    for (let i = 0; i <= $inputIterations.length; i++) {
+        let $name = $target.prop('name');
+
+        console.log($inputIterations[i]);
+        console.log($name);
+        if ($target.prop('checked')) {
+            if ($dateAndTime === $inputIterations[i] && $name != $inputIterations[i].prop('name')) {
+
+
+
+                $inputIterations.attr('disabled', true);
+
+            } else {
+                if ($dateAndTime === $inputIterations[i] && $name != $inputIterations[i].prop('name')) {
+
+                    $inputIterations.attr('disabled', false);
+
+                }
+            }
+        }
+    }
 })

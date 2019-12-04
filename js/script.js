@@ -107,22 +107,24 @@ $activityClass.change(function (e) {
 
     let $inputIterations = $('.activities input');
     for (let i = 0; i <= $inputIterations.length; i++) {
-        let $name = $target.prop('name');
+        let $name = $target.attr('name');
 
         console.log($inputIterations[i]);
         console.log($name);
         if ($target.prop('checked')) {
-            if ($dateAndTime === $inputIterations[i] && $name != $inputIterations[i].prop('name')) {
+            if ($dateAndTime === $($inputIterations[i]).attr('data-day-and-time') && $name != $($inputIterations[i]).attr('name')) {
 
 
 
-                $inputIterations.attr('disabled', true);
+                $($inputIterations[i]).attr('disabled', true);
 
             } else {
-                if ($dateAndTime === $inputIterations[i] && $name != $inputIterations[i].prop('name')) {
+                if ($target.prop('unchecked')) {
+                    if ($dateAndTime === $($inputIterations[i]).attr('data-day-and-time') && $name != $($inputIterations[i]).attr('name')) {
 
-                    $inputIterations.attr('disabled', false);
+                        $($inputIterations[i]).attr('disabled', false);
 
+                    }
                 }
             }
         }

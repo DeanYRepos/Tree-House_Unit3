@@ -116,16 +116,14 @@ $activityClass.change(function (e) {
 
 
 
-                $($inputIterations[i]).attr('disabled', true);
+               $($inputIterations[i]).attr('disabled', true);
 
-            } else {
-                if ($target.prop('unchecked')) {
-                    if ($dateAndTime === $($inputIterations[i]).attr('data-day-and-time') && $name != $($inputIterations[i]).attr('name')) {
+            } 
+        } else {
+            if ($dateAndTime === $($inputIterations[i]).attr('data-day-and-time') && $name != $($inputIterations[i]).attr('name')) {
 
-                        $($inputIterations[i]).attr('disabled', false);
+                $($inputIterations[i]).removeAttr('disabled');
 
-                    }
-                }
             }
         }
     }

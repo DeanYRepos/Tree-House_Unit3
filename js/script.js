@@ -132,11 +132,11 @@ let $payPal = $('#payment option[value="PayPal"]');
 let $bitCoin = $('#payment option[value="Bitcoin"]');
 let $creditCard = $('#payment option[value="Credit Card"]');
 let $selectPayment = $('#payment option [value="select method"]');
-let $payment = $('#payment option');
+let $payment = $('#payment');
 
 $creditCard.prop('selected',true);
 
-$selectPayment.prop('hidden',true);
+$selectPayment.prop('disabled',true);
 
 $payment.change(function (){
 
@@ -149,13 +149,13 @@ if($(this).val() === 'Credit Card'){
     $payment.hide();
 
 
-} if ($(this).val() === 'Bitcoin'){
+} else if ($(this).val() === 'Bitcoin'){
     $bitCoin.show();
     $creditCard.hide();
     $payment.hide();
 
 
-}  else ($(this).val() === 'PayPal')
+}  else if ($(this).val() === 'PayPal'){
     $payPal.show();
     $creditCard.hide();
     $bitCoin.hide();
@@ -164,7 +164,7 @@ if($(this).val() === 'Credit Card'){
 
 
 
-
+}
 
 })
 

@@ -34,7 +34,7 @@ let $colorText = $("<option>Please select a T-shirt theme</option>"); //inserted
 $colorText.attr('value', 'color-text'); // seting value of attr
 
 $color.prepend($colorText); //prepending to color option list
-$colorText.attr('selected', 'true'); //selecting option item to show first when page loads  
+$colorText.attr('selected', true); //selecting option item to show first when page loads  
 
 $design.change(function () { //event handler hides select theme option
     $('#design :first').prop('hidden', true);
@@ -106,19 +106,19 @@ $activityClass.change(function (e) {
     $('.activities div').html('<div>Total Cost: $' + activityCostTotal + '</div>'); //concatinating total cost of activities to div string
 
     let $inputIterations = $('.activities input');
-    for (let i = 0; i <= $inputIterations.length; i++) {
+    for (let i = 0; i <= $inputIterations.length; i++) { //looping through activitiy inputs 
         let $name = $target.attr('name');
 
         console.log($inputIterations[i]);
         console.log($name);
-        if ($target.prop('checked')) {
-            if ($dateAndTime === $($inputIterations[i]).attr('data-day-and-time') && $name != $($inputIterations[i]).attr('name')) {
+        if ($target.prop('checked')) { //if target is checked 
+            if ($dateAndTime === $($inputIterations[i]).attr('data-day-and-time') && $name != $($inputIterations[i]).attr('name')) {//checking whether dates/time and names match iterations
 
 
 
-               $($inputIterations[i]).attr('disabled', true);
+                $($inputIterations[i]).attr('disabled', true); //if attributes matched, matching items disabled 
 
-            } 
+            }
         } else {
             if ($dateAndTime === $($inputIterations[i]).attr('data-day-and-time') && $name != $($inputIterations[i]).attr('name')) {
 
@@ -128,3 +128,43 @@ $activityClass.change(function (e) {
         }
     }
 })
+let $payPal = $('#payment option[value="PayPal"]');
+let $bitCoin = $('#payment option[value="Bitcoin"]');
+let $creditCard = $('#payment option[value="Credit Card"]');
+let $selectPayment = $('#payment option [value="select method"]');
+let $payment = $('#payment option');
+
+$creditCard.prop('selected',true);
+
+$selectPayment.prop('hidden',true);
+
+$payment.change(function (){
+
+
+
+if($(this).val() === 'Credit Card'){
+   
+    $creditCard.show();
+    $bitCoin.hide();
+    $payment.hide();
+
+
+} if ($(this).val() === 'Bitcoin'){
+    $bitCoin.show();
+    $creditCard.hide();
+    $payment.hide();
+
+
+}  else ($(this).val() === 'PayPal')
+    $payPal.show();
+    $creditCard.hide();
+    $bitCoin.hide();
+    
+
+
+
+
+
+
+})
+

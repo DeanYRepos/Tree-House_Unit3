@@ -128,31 +128,33 @@ $activityClass.change(function (e) {
         }
     }
 })
-let $payPal = $('#payment option[value="PayPal"]');
-let $bitCoin = $('#payment option[value="Bitcoin"]');
-let $creditCard = $('#payment option[value="Credit Card"]');
+let $payPal = $('#paypal');
+let $bitCoin = $('#bitcoin');
+let $creditCard = $('#credit-card');
 let $selectPayment = $('#payment option [value="select method"]');
 let $payment = $('#payment');
 
-$creditCard.prop('selected',true);
 
-$selectPayment.prop('disabled',true);
+
+$selectPayment.prop('selected',true);
+
+//$selectPayment.prop('disabled',true);
 
 $payment.change(function (){
-
+   
 
 
 if($(this).val() === 'Credit Card'){
    
     $creditCard.show();
     $bitCoin.hide();
-    $payment.hide();
+    $payPal.hide();
 
 
 } else if ($(this).val() === 'Bitcoin'){
     $bitCoin.show();
     $creditCard.hide();
-    $payment.hide();
+    $payPal.hide();
 
 
 }  else if ($(this).val() === 'PayPal'){

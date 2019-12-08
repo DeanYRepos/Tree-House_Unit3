@@ -112,7 +112,7 @@ $activityClass.change(function (e) {
         console.log($inputIterations[i]);
         console.log($name);
         if ($target.prop('checked')) { //if target is checked 
-            if ($dateAndTime === $($inputIterations[i]).attr('data-day-and-time') && $name != $($inputIterations[i]).attr('name')) {//checking whether dates/time and names match iterations
+            if ($dateAndTime === $($inputIterations[i]).attr('data-day-and-time') && $name != $($inputIterations[i]).attr('name')) { //checking whether dates/time and names match iterations
 
 
 
@@ -131,42 +131,63 @@ $activityClass.change(function (e) {
 let $payPal = $('#paypal');
 let $bitCoin = $('#bitcoin');
 let $creditCard = $('#credit-card');
-let $selectPayment = $('#payment option [value="select method"]');
 let $payment = $('#payment');
 
+$creditCard.attr('selected', true); 
+
+$payPal.hide();
+$bitCoin.hide();
 
 
-$selectPayment.prop('selected',true);
-
-//$selectPayment.prop('disabled',true);
-
-$payment.change(function (){
-   
 
 
-if($(this).val() === 'Credit Card'){
-   
-    $creditCard.show();
-    $bitCoin.hide();
-    $payPal.hide();
+$payment.change(function () { //hiding and showing payment options based on selection
 
 
-} else if ($(this).val() === 'Bitcoin'){
-    $bitCoin.show();
-    $creditCard.hide();
-    $payPal.hide();
+
+    if ($(this).val() === 'Credit Card') {
+
+        $creditCard.show();
+        $bitCoin.hide();
+        $payPal.hide();
 
 
-}  else if ($(this).val() === 'PayPal'){
-    $payPal.show();
-    $creditCard.hide();
-    $bitCoin.hide();
+    } else if ($(this).val() === 'Bitcoin') {
+        $bitCoin.show();
+        $creditCard.hide();
+        $payPal.hide();
+
+
+    } else if ($(this).val() === 'PayPal') {
+        $payPal.show();
+        $creditCard.hide();
+        $bitCoin.hide();
+
+
+
+
+
+    }
+
+})
+
+const $nameInput = $('#name');
+const $nameInputSpan = $('<span class="validate">Please enter a valid name</span>');
+function name() {
+
     
 
+    if($nameInput.val().length === 0){
+$nameInput.addClass('error');
+$nameInputSpan.show();
+return true;
 
+    }else 
+    $nameInput.removeClass('error');
+    $nameInputSpan.hide();
+    return false;
 
 
 }
 
-})
 

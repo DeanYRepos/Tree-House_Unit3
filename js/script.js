@@ -133,7 +133,7 @@ let $bitCoin = $('#bitcoin');
 let $creditCard = $('#credit-card');
 let $payment = $('#payment');
 
-$creditCard.attr('selected', true); 
+$creditCard.attr('selected', true);
 
 $payPal.hide();
 $bitCoin.hide();
@@ -173,21 +173,62 @@ $payment.change(function () { //hiding and showing payment options based on sele
 
 const $nameInput = $('#name');
 const $nameInputSpan = $('<span class="validate">Please enter a valid name</span>');
+
 function name() {
 
-    
-
-    if($nameInput.val().length === 0){
-$nameInput.addClass('error');
-$nameInputSpan.show();
-return true;
-
-    }else 
-    $nameInput.removeClass('error');
-    $nameInputSpan.hide();
-    return false;
 
 
+    if ($nameInput.val().length === 0) {
+        $nameInput.addClass('error');
+        $nameInputSpan.show();
+        $nameInput.css('border', 'red');
+        return true;
+
+    } else {
+        $nameInput.removeClass('error');
+        $nameInputSpan.hide();
+        $nameInput.css('border','black');
+        return false;
+
+    }
+}
+name();
+const $emailInput = $('#mail');
+const $emailInputSpan = $('<span class="validate">Please enter a valid email address</span>');
+const regex = /^[^@]+@[^@.]+\.[a-z]{3}$/i;
+
+function email() {
+
+    if (!(regex.test($(emailInput).val()))) {
+
+        $emailInput.addClass('error');
+        $emailInputSpan.show();
+        return true;
+    } else {
+        $emailInput.removeClass('error');
+        $emailInputSpan.hide();
+        return false;
+
+
+    }
 }
 
+const $activitySpan = $('<span class="activities">Please choose at least one activity</span>');
 
+function activity() {
+
+    if (activityCostTotal === 0) {
+
+        $activityClass.css('color', 'red');
+        $activitySpan.show();
+
+
+        return true;
+
+    } else {
+        $activityClass('color', 'black');
+        $activitySpan.hide();
+        return false;
+    }
+
+}

@@ -181,39 +181,39 @@ function name() {
     if ($nameInput.val().length === 0) {
         $nameInput.addClass('error');
         $nameInputSpan.show();
-        $nameInput.css('border', 'red');
-        return true;
+
+        return false;
 
     } else {
         $nameInput.removeClass('error');
         $nameInputSpan.hide();
-        $nameInput.css('border','black');
-        return false;
+
+        return true;
 
     }
 }
-name();
+console.log(name());
 const $emailInput = $('#mail');
 const $emailInputSpan = $('<span class="validate">Please enter a valid email address</span>');
 const regex = /^[^@]+@[^@.]+\.[a-z]{3}$/i;
 
 function email() {
 
-    if (!(regex.test($(emailInput).val()))) {
+    if (!(regex.test($($emailInput).val()))) {
 
         $emailInput.addClass('error');
         $emailInputSpan.show();
-        return true;
+        return false;
     } else {
         $emailInput.removeClass('error');
         $emailInputSpan.hide();
-        return false;
+        return true;
 
 
     }
 }
-
-const $activitySpan = $('<span class="activities">Please choose at least one activity</span>');
+console.log(email());
+const $activitySpan = $('<span class="validate">Please choose at least one activity</span>');
 
 function activity() {
 
@@ -223,12 +223,149 @@ function activity() {
         $activitySpan.show();
 
 
-        return true;
+        return false;
 
     } else {
         $activityClass('color', 'black');
         $activitySpan.hide();
-        return false;
+        return true;
     }
 
 }
+
+const ccRegex = /^[\d]{4}[\d]{4}[\d]{4}[\d]{1,4}$/;
+const $ccSpan = $('<span class="validate">Please enter a valid credit card number</span>');
+const $creditCardInput = $('#cc-num');
+
+function creditCardNum() {
+
+    if (!(ccRegex.test($('#cc-num').val()))) {
+
+        $creditCardInput.addClass('error');
+        $ccSpan.show();
+
+        return false;
+
+    } else {
+
+        $creditCardInput.removeClass('error');
+        $ccSpan.hide();
+
+        return true;
+
+
+    }
+
+}
+const zipRegex = /^[/d]{5}$/;
+const $zipSpan = $('<span class="validate">PLease enter valid zipcode</span>');
+const $zipcodeInput = $('#zip');
+
+function zipcode() {
+
+    if (!(zipRegex.test($('#zip').val()))) {
+
+        $zipcodeInput.addClass('error');
+        $zipSpan.show();
+
+        return false;
+
+    } else {
+
+        $zipcodeInput.removeClass('error');
+        $zipSpan.hide();
+
+        return true;
+    }
+
+
+}
+
+const cvvRegex = /^[/d]{3}$/;
+const $cvvSpan = $('<span class= "validate">Please enter valid cvv number</span>');
+const $cvvInput = $('#cvv');
+
+function cvv() {
+
+    if (!(cvvRegex.test($('#cvv').val()))) {
+
+        $cvvInput.addClass('error');
+        $cvvSpan.show();
+        return false;
+
+
+    } else {
+
+        $cvvInput.removeClass('error');
+        $cvvSpan.hides();
+
+        return true;
+
+    }
+
+
+}
+
+function creditCardVal() {
+
+    $('#cc-num').keyup(function () {
+
+        creditCardNum();
+        $ccSpan.show();
+
+
+    })
+    $('#zip').keyup(function () {
+
+        zipcode();
+
+
+
+    })
+    $('#cvv').keyup(function () {
+
+        cvv();
+
+    })
+}
+creditCardVal();
+console.log(creditCardVal());
+
+
+$('form').submit(function(e){
+
+if(name() === true){
+e.preventDefault();
+
+
+}
+
+    if(email() === true){
+        e.preventDefault();
+        
+        
+        }
+        if(activity() === true){
+            e.preventDefault();
+            
+            
+            }
+            if($('#payment').val() === 'credit card'){
+                if(creditCardNum() === true){
+               
+                    e.preventDefault();
+            }
+                
+                
+                if(zipcode() === true){
+                    e.preventDefault();
+                    
+                    
+                    }
+                    if(cvv() === true){
+                        e.preventDefault();
+                        
+                        
+                        }
+                    }
+})

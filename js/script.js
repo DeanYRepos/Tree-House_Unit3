@@ -35,21 +35,24 @@ $colorText.attr('value', 'color-text'); // setting value of attr
 
 $color.prepend($colorText); //prepending to color option list
 $colorText.attr('selected', true); //selecting option item to show first when page loads  
-$('#color option').eq(0).attr('hidden',true);//event handler hides select theme option
-   
-    $('#design option').eq(0).attr('hidden',true);
+//$('#color option').eq(0).attr('selected',true);
+$('#color option').eq(0).attr('hidden', true); //event handler hides select theme option
+
+
+//$('#design option').eq(0).attr('selcted',true);
+$('#design option').eq(0).attr('hidden', true);
 $design.change(function () { //event handler hides select theme option
-    
-    $('#design option[0]').attr('hidden',true);
+
+    $('#design option[0]').attr('hidden', true);
 })
 $colorOp.prop('hidden', true); //hides all color options except first option
 
 
 $design.change(function () { //event handler, listening for design selection, showing corresponding colors
     console.log(this);
- 
+
     if ($(this).val() === 'js puns') { //conditional determning theme selected
-      
+
         $cornFlowerBlue.prop('selected', true); //selects first available color for theme
 
         $cornFlowerBlue.show();
@@ -137,9 +140,11 @@ let $payPal = $('#paypal');
 let $bitCoin = $('#bitcoin');
 let $creditCard = $('#credit-card');
 let $payment = $('#payment');
-$('#payment option').eq(0).attr('hidden',true);   
-$('#payment option').eq(1).attr('selected',true); 
+$('#payment option').eq(0).attr('hidden', true);
+$('#payment option').eq(1).attr('selected', true);
+
 $creditCard.attr('selected', true);
+
 
 $payPal.hide();
 $bitCoin.hide();
@@ -149,21 +154,22 @@ $bitCoin.hide();
 //Payment Section
 $payment.change(function () { //hiding and showing payment options based on selection
 
-
     if ($(this).val() === 'Credit Card') {
-
+      
         $creditCard.show();
         $bitCoin.hide();
         $payPal.hide();
 
 
     } else if ($(this).val() === 'Bitcoin') {
+
         $bitCoin.show();
         $creditCard.hide();
         $payPal.hide();
 
 
     } else if ($(this).val() === 'PayPal') {
+       
         $payPal.show();
         $creditCard.hide();
         $bitCoin.hide();
@@ -180,19 +186,18 @@ const $nameInput = $('#name');
 const $nameInputSpan = $('<span class="validate">Please enter a valid name</span>');
 
 function name() {
-   // $nameInput.before($nameInputSpan);
 
 
     if ($nameInput.val().length === 0) {
-       
-        //$nameInput.before($nameInputSpan);
-        $nameInputSpan.css('color','red');
-let $newNameSpan = $nameInput.after($nameInputSpan);
+
+
+        $nameInputSpan.css('color', 'red');
+        let $newNameSpan = $nameInput.after($nameInputSpan);
         return false;
 
     } else {
-       
-        $nameInputSpan.attr('hidden',true);
+
+        $nameInputSpan.attr('hidden', true);
 
         return true;
 
@@ -206,14 +211,14 @@ const regex = /^[^@]+@[^@.]+\.[a-z]{3}$/i;
 function email() {
 
     if (!(regex.test($($emailInput).val()))) {
-$emailInputSpan.css('color','red');
-      let $newEmailSpan = $emailInput.after($emailInputSpan);
-    
-      
+        $emailInputSpan.css('color', 'red');
+        let $newEmailSpan = $emailInput.after($emailInputSpan);
+
+
         return false;
     } else {
-       $newEmailSpan.attr('hidden',true);
-     
+        $newEmailSpan.attr('hidden', true);
+
         return true;
 
 
@@ -225,8 +230,8 @@ const $activitySpan = $('<span class="validate">Please choose at least one activ
 function activity() {
 
     if (activityCostTotal === 0) {
-     let $newActivitySpan =  $($newDiv).before($activitySpan);
-      $newActivitySpan.css('color','red');
+        let $newActivitySpan = $($newDiv).before($activitySpan);
+        $newActivitySpan.css('color', 'red');
         $activityClass.css('color', 'red');
 
 
@@ -236,7 +241,7 @@ function activity() {
     } else {
 
         $activityClass.css('color', 'black');
-        $newActivitySpan.attr('hidden',true)
+        $newActivitySpan.attr('hidden', true)
         return true;
     }
 
@@ -249,16 +254,14 @@ const $creditCardInput = $('#cc-num');
 function creditCardNum() {
 
     if (!(ccRegex.test($('#cc-num').val()))) {
-
-        $creditCardInput.addClass('error');
-        $ccSpan.show();
-
+        $ccSpan.css('color','red');
+        let $newCCSpan = $($creditCardInput).after($ccSpan);
+      
         return false;
 
     } else {
 
-        $creditCardInput.removeClass('error');
-        $ccSpan.hide();
+       $newCCSpan.attr('hidden',true);
 
         return true;
 
@@ -274,15 +277,13 @@ function zipcode() {
 
     if (!(zipRegex.test($('#zip').val()))) {
 
-        $zipcodeInput.addClass('error');
-        $zipSpan.show();
-
+        $zipSpan.css('color','red')
+        let $newZipSpan = $($zipcodeInput).after($zipSpan);
         return false;
 
     } else {
 
-        $zipcodeInput.removeClass('error');
-        $zipSpan.hide();
+       $newZipSpan.attr('hidden',true);
 
         return true;
     }
@@ -294,19 +295,17 @@ const cvvRegex = /^[/d]{3}$/;
 const $cvvSpan = $('<span class="validate">Please enter valid cvv number</span>');
 const $cvvInput = $('#cvv');
 
-function cvv() { 
+function cvv() {
 
     if (!(cvvRegex.test($('#cvv').val()))) {
 
-        $cvvInput.addClass('error');
-        $cvvSpan.show();
+        $cvvSpan.css('color','red');
+        let $newCvvSpan = $($cvvInput).after($cvvSpan);
         return false;
 
 
     } else {
-
-        $cvvInput.removeClass('error');
-        $cvvSpan.hides();
+$newCvvSpan.attr('hidden','red');
 
         return true;
 
@@ -354,7 +353,7 @@ $('form').submit(function (e) {
 
 
     }
-    if (activity() === false ) {
+    if (activity() === false) {
         e.preventDefault();
 
 

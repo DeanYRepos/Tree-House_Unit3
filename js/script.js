@@ -1,12 +1,12 @@
 //Global variables
-let $other = $("#other-title");
-let $dropOption = $("#title");
-let $cornFlowerBlue = $('#color option[value="cornflowerblue"]');
-let $darkSlateGrey = $('#color option[value="darkslategrey"]');
-let $gold = $('#color option[value="gold"]');
-let $tomato = $('#color option[value="tomato"]');
-let $steelBlue = $('#color option[value="steelblue"]');
-let $dimGrey = $('#color option[value="dimgrey"]');
+const $other = $("#other-title");
+const $dropOption = $("#title");
+const $cornFlowerBlue = $('#color option[value="cornflowerblue"]');
+const $darkSlateGrey = $('#color option[value="darkslategrey"]');
+const $gold = $('#color option[value="gold"]');
+const $tomato = $('#color option[value="tomato"]');
+const $steelBlue = $('#color option[value="steelblue"]');
+const $dimGrey = $('#color option[value="dimgrey"]');
 
 const $name = $("#name").focus(); //starts cursor in Name input upon loading
 
@@ -27,10 +27,10 @@ $dropOption.change(function () { //event handler showing/hiding input field when
 })
 
 // T-Shirt
-let $color = $('#color'); //list of color options
-let $colorOp = $('#color option');
-let $design = $('#design');
-let $colorText = $("<option>Please select a T-shirt theme</option>"); //inserted option item to prompt user to select theme
+const $color = $('#color'); //list of color options
+const $colorOp = $('#color option');
+const $design = $('#design');
+const $colorText = $("<option>Please select a T-shirt theme</option>"); //inserted option item to prompt user to select theme
 $colorText.attr('value', 'color-text'); // setting value of attr
 
 $color.prepend($colorText); //prepending to color option list
@@ -80,16 +80,16 @@ $design.change(function () { //event handler, listening for design selection, sh
 
 //Activity Section
 
-let $newDiv = $("<div>Total Cost: $</div>");
-let $activityClass = $(".activities");
-let $activityClass_Div = $(".activities").append($newDiv);
-let activityCostTotal = 0;
+const $newDiv = $("<div>Total Cost: $</div>");
+const $activityClass = $(".activities");
+const $activityClass_Div = $(".activities").append($newDiv);
+const activityCostTotal = 0;
 
 
 $activityClass.change(function (e) {
-    let $target = $(e.target);
-    let $dateAndTime = $target.attr('data-day-and-time');
-    let $dataCost = parseInt($target.attr('data-cost').slice(-3)); //parsing the input clicked to an integer
+    const $target = $(e.target);
+    const $dateAndTime = $target.attr('data-day-and-time');
+    const $dataCost = parseInt($target.attr('data-cost').slice(-3)); //parsing the input clicked to an integer
 
     console.log($target);
     console.log($dateAndTime);
@@ -113,9 +113,9 @@ $activityClass.change(function (e) {
 
     $('.activities div').html('<div>Total Cost: $' + activityCostTotal + '</div>'); //concatinating total cost of activities to div string
 
-    let $inputIterations = $('.activities input');
+    const $inputIterations = $('.activities input');
     for (let i = 0; i <= $inputIterations.length; i++) { //looping through activitiy inputs 
-        let $name = $target.attr('name');
+        const $name = $target.attr('name');
 
         console.log($inputIterations[i]);
         console.log($name);
@@ -136,10 +136,10 @@ $activityClass.change(function (e) {
         }
     }
 })
-let $payPal = $('#paypal');
-let $bitCoin = $('#bitcoin');
-let $creditCard = $('#credit-card');
-let $payment = $('#payment');
+const $payPal = $('#paypal');
+const $bitCoin = $('#bitcoin');
+const $creditCard = $('#credit-card');
+const $payment = $('#payment');
 $('#payment option').eq(0).attr('hidden', true);
 $('#payment option').eq(1).attr('selected', true);
 
@@ -155,7 +155,7 @@ $bitCoin.hide();
 $payment.change(function () { //hiding and showing payment options based on selection
 
     if ($(this).val() === 'Credit Card') {
-      
+
         $creditCard.show();
         $bitCoin.hide();
         $payPal.hide();
@@ -169,7 +169,7 @@ $payment.change(function () { //hiding and showing payment options based on sele
 
 
     } else if ($(this).val() === 'PayPal') {
-       
+
         $payPal.show();
         $creditCard.hide();
         $bitCoin.hide();
@@ -254,14 +254,14 @@ const $creditCardInput = $('#cc-num');
 function creditCardNum() {
 
     if (!(ccRegex.test($('#cc-num').val()))) {
-        $ccSpan.css('color','red');
+        $ccSpan.css('color', 'red');
         let $newCCSpan = $($creditCardInput).after($ccSpan);
-      
+
         return false;
 
     } else {
 
-       $newCCSpan.attr('hidden',true);
+        $newCCSpan.attr('hidden', true);
 
         return true;
 
@@ -269,7 +269,7 @@ function creditCardNum() {
     }
 
 }
-const zipRegex = /^[/d]{5}$/;
+const zipRegex = /^[/d]{5}?-[/d]{4}$/
 const $zipSpan = $('<span class="validate">PLease enter valid zipcode</span>');
 const $zipcodeInput = $('#zip');
 
@@ -277,13 +277,13 @@ function zipcode() {
 
     if (!(zipRegex.test($('#zip').val()))) {
 
-        $zipSpan.css('color','red')
+        $zipSpan.css('color', 'red')
         let $newZipSpan = $($zipcodeInput).after($zipSpan);
         return false;
 
     } else {
 
-       $newZipSpan.attr('hidden',true);
+        $newZipSpan.attr('hidden', true);
 
         return true;
     }
@@ -299,13 +299,13 @@ function cvv() {
 
     if (!(cvvRegex.test($('#cvv').val()))) {
 
-        $cvvSpan.css('color','red');
+        $cvvSpan.css('color', 'red');
         let $newCvvSpan = $($cvvInput).after($cvvSpan);
         return false;
 
 
     } else {
-$newCvvSpan.attr('hidden','red');
+        $newCvvSpan.attr('hidden', 'red');
 
         return true;
 
@@ -319,7 +319,7 @@ function creditCardVal() { //validating credit card inputs
     $('#cc-num').keyup(function () {
 
         creditCardNum();
-        $ccSpan.show();
+        // $ccSpan.show();
 
 
     })

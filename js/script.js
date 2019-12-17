@@ -269,7 +269,7 @@ function creditCardNum() {
     }
 
 }
-const zipRegex = /^[/d]{5}?-[/d]{4}$/
+const zipRegex =   /^\d{5}(?:[-\s]\d{4})?$/    
 const $zipSpan = $('<span class="validate">PLease enter valid zipcode</span>');
 const $zipcodeInput = $('#zip');
 

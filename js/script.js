@@ -83,13 +83,13 @@ $design.change(function () { //event handler, listening for design selection, sh
 const $newDiv = $("<div>Total Cost: $</div>");
 const $activityClass = $(".activities");
 const $activityClass_Div = $(".activities").append($newDiv);
-const activityCostTotal = 0;
+let activityCostTotal = 0;
 
 
 $activityClass.change(function (e) {
     const $target = $(e.target);
     const $dateAndTime = $target.attr('data-day-and-time');
-    const $dataCost = parseInt($target.attr('data-cost').slice(-3)); //parsing the input clicked to an integer
+    let $dataCost = parseInt($target.attr('data-cost').slice(-3)); //parsing the input clicked to an integer
 
     console.log($target);
     console.log($dateAndTime);
@@ -184,15 +184,16 @@ $payment.change(function () { //hiding and showing payment options based on sele
 //Form Validation Section
 const $nameInput = $('#name');
 const $nameInputSpan = $('<span class="validate">Please enter a valid name</span>');
-
+$nameInputSpan.css('color', 'red');
 function name() {
 
 
     if ($nameInput.val().length === 0) {
 
 
-        $nameInputSpan.css('color', 'red');
+        
         let $newNameSpan = $nameInput.after($nameInputSpan);
+        $nameInputSpan.attr('hidden',false);
         return false;
 
     } else {
@@ -208,16 +209,19 @@ const $emailInput = $('#mail');
 const $emailInputSpan = $('<span class="validate">Please enter a valid email address</span>');
 const regex = /^[^@]+@[^@.]+\.[a-z]{3}$/i;
 
+$emailInputSpan.css('color', 'red');
+
 function email() {
 
     if (!(regex.test($($emailInput).val()))) {
-        $emailInputSpan.css('color', 'red');
+       
         let $newEmailSpan = $emailInput.after($emailInputSpan);
+       $emailInputSpan.attr('hidden',false);
 
 
         return false;
     } else {
-        $newEmailSpan.attr('hidden', true);
+        $emailInputSpan.attr('hidden', true);
 
         return true;
 
@@ -241,7 +245,7 @@ function activity() {
     } else {
 
         $activityClass.css('color', 'black');
-        $newActivitySpan.attr('hidden', true)
+        $ActivitySpan.attr('hidden', true)
         return true;
     }
 
@@ -250,18 +254,18 @@ function activity() {
 const ccRegex = /^[\d]{4}[\d]{4}[\d]{4}[\d]{1,4}$/;
 const $ccSpan = $('<span class="validate">Please enter a valid credit card number</span>');
 const $creditCardInput = $('#cc-num');
-
+$ccSpan.css('color','red');
 function creditCardNum() {
 
     if (!(ccRegex.test($('#cc-num').val()))) {
-        $ccSpan.css('color', 'red');
+        $ccSpan.attr('hidden',false);
         let $newCCSpan = $($creditCardInput).after($ccSpan);
 
         return false;
 
     } else {
 
-        $newCCSpan.attr('hidden', true);
+        $ccSpan.attr('hidden', true);
 
         return true;
 
@@ -283,7 +287,7 @@ function zipcode() {
 
     } else {
 
-        $newZipSpan.attr('hidden', true);
+        $zipSpan.attr('hidden', true);
 
         return true;
     }
@@ -291,21 +295,21 @@ function zipcode() {
 
 }
 
-const cvvRegex = /^[/d]{3}$/;
+const cvvRegex = /^\d{3}$/;
 const $cvvSpan = $('<span class="validate">Please enter valid cvv number</span>');
 const $cvvInput = $('#cvv');
-
+$cvvSpan.css('color', 'red');
 function cvv() {
 
     if (!(cvvRegex.test($('#cvv').val()))) {
 
-        $cvvSpan.css('color', 'red');
+        $cvvSpan.css('color','red');
         let $newCvvSpan = $($cvvInput).after($cvvSpan);
         return false;
 
 
     } else {
-        $newCvvSpan.attr('hidden', 'red');
+        $cvvSpan.attr('hidden', true);
 
         return true;
 
@@ -319,7 +323,7 @@ function creditCardVal() { //validating credit card inputs
     $('#cc-num').keyup(function () {
 
         creditCardNum();
-        // $ccSpan.show();
+       
 
 
     })
@@ -358,7 +362,7 @@ $('form').submit(function (e) {
 
 
     }
-    if ($('#payment').val() === 'Credit Card') {
+    else if ($('#payment').val() === 'Credit Card') {
         if (creditCardNum() === false) {
 
             e.preventDefault();

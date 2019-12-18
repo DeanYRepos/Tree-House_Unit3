@@ -9,6 +9,33 @@ const $steelBlue = $('#color option[value="steelblue"]');
 const $dimGrey = $('#color option[value="dimgrey"]');
 
 const $name = $("#name").focus(); //starts cursor in Name input upon loading
+const $color = $('#color'); //list of color options
+const $colorOp = $('#color option');
+const $design = $('#design');
+const $colorText = $("<option>Please select a T-shirt theme</option>"); //inserted option item to prompt user to select theme
+const $newDiv = $("<div>Total Cost: $</div>");
+const $activityClass = $(".activities");
+const $activityClass_Div = $(".activities").append($newDiv);
+let activityCostTotal = 0;
+const $payPal = $('#paypal');
+const $bitCoin = $('#bitcoin');
+const $creditCard = $('#credit-card');
+const $payment = $('#payment');
+const $nameInput = $('#name');
+const $nameInputSpan = $('<span class="validate">Please enter a valid name</span>');
+const $emailInput = $('#mail');
+const $emailInputSpan = $('<span class="validate">Please enter a valid email address</span>');
+const regex = /^[^@]+@[^@.]+\.[a-z]{3}$/i;
+const ccRegex = /^[\d]{4}[\d]{4}[\d]{4}[\d]{1,4}$/;
+const $ccSpan = $('<span class="validate">Please enter a valid credit card number</span>');
+const $creditCardInput = $('#cc-num');
+const zipRegex = /^\d{5}(?:[-\s]\d{4})?$/
+const $zipSpan = $('<span class="validate">Please enter valid zipcode</span>');
+const $zipcodeInput = $('#zip');
+const cvvRegex = /^\d{3}$/;
+const $cvvSpan = $('<span class="validate">Please enter valid cvv number</span>');
+const $cvvInput = $('#cvv');
+const $secondCCSPan = $('<span>Please enter a number 13 to 16 digits long</span>');
 
 //Job Role
 
@@ -27,10 +54,8 @@ $dropOption.change(function () { //event handler showing/hiding input field when
 })
 
 // T-Shirt
-const $color = $('#color'); //list of color options
-const $colorOp = $('#color option');
-const $design = $('#design');
-const $colorText = $("<option>Please select a T-shirt theme</option>"); //inserted option item to prompt user to select theme
+$color.attr('hidden',true); //hides color options
+
 $colorText.attr('value', 'color-text'); // setting value of attr
 
 $color.prepend($colorText); //prepending to color option list
@@ -50,6 +75,7 @@ $colorOp.prop('hidden', true); //hides all color options except first option
 
 $design.change(function () { //event handler, listening for design selection, showing corresponding colors
     console.log(this);
+    $color.attr('hidden',false); //shows color options
 
     if ($(this).val() === 'js puns') { //conditional determning theme selected
 
@@ -80,10 +106,7 @@ $design.change(function () { //event handler, listening for design selection, sh
 
 //Activity Section
 
-const $newDiv = $("<div>Total Cost: $</div>");
-const $activityClass = $(".activities");
-const $activityClass_Div = $(".activities").append($newDiv);
-let activityCostTotal = 0;
+
 
 
 $activityClass.change(function (e) {
@@ -136,10 +159,7 @@ $activityClass.change(function (e) {
         }
     }
 })
-const $payPal = $('#paypal');
-const $bitCoin = $('#bitcoin');
-const $creditCard = $('#credit-card');
-const $payment = $('#payment');
+
 $('#payment option').eq(0).attr('hidden', true);
 $('#payment option').eq(1).attr('selected', true);
 
@@ -182,18 +202,18 @@ $payment.change(function () { //hiding and showing payment options based on sele
 
 })
 //Form Validation Section
-const $nameInput = $('#name');
-const $nameInputSpan = $('<span class="validate">Please enter a valid name</span>');
+
 $nameInputSpan.css('color', 'red');
+
 function name() {
 
 
     if ($nameInput.val().length === 0) {
 
 
-        
+
         let $newNameSpan = $nameInput.after($nameInputSpan);
-        $nameInputSpan.attr('hidden',false);
+        $nameInputSpan.attr('hidden', false);
         return false;
 
     } else {
@@ -205,18 +225,16 @@ function name() {
     }
 }
 
-const $emailInput = $('#mail');
-const $emailInputSpan = $('<span class="validate">Please enter a valid email address</span>');
-const regex = /^[^@]+@[^@.]+\.[a-z]{3}$/i;
+
 
 $emailInputSpan.css('color', 'red');
 
 function email() {
 
     if (!(regex.test($($emailInput).val()))) {
-       
+
         let $newEmailSpan = $emailInput.after($emailInputSpan);
-       $emailInputSpan.attr('hidden',false);
+        $emailInputSpan.attr('hidden', false);
 
 
         return false;
@@ -231,7 +249,7 @@ function email() {
 
 const $activitySpan = $('<span class="validate">Please choose at least one activity</span>');
 
-function activity() {
+function activity() { //activity validation
 
     if (activityCostTotal === 0) {
         let $newActivitySpan = $($newDiv).before($activitySpan);
@@ -251,33 +269,39 @@ function activity() {
 
 }
 
-const ccRegex = /^[\d]{4}[\d]{4}[\d]{4}[\d]{1,4}$/;
-const $ccSpan = $('<span class="validate">Please enter a valid credit card number</span>');
-const $creditCardInput = $('#cc-num');
-$ccSpan.css('color','red');
-function creditCardNum() {
+
+$ccSpan.css('color', 'red');
+$secondCCSPan.css('color','red');
+
+function creditCardNum() { //credit card number validation
 
     if (!(ccRegex.test($('#cc-num').val()))) {
-        $ccSpan.attr('hidden',false);
+        $ccSpan.attr('hidden', false);
         let $newCCSpan = $($creditCardInput).after($ccSpan);
+        $secondCCSPan.attr('hidden',true);
+
+if  ((ccRegex.test($('#cc-num').val())) < 13 || (ccRegex.test($('#cc-num').val())) > 16 ){
+
+         $($creditCardInput).after($secondCCSPan);
+$secondCCSPan.attr('hidden',false);
+$ccSpan.attr('hidden', true);
+}
 
         return false;
 
     } else {
 
         $ccSpan.attr('hidden', true);
-
+$secondCCSPan.attr('hidden',true);
         return true;
 
 
     }
 
 }
-const zipRegex =   /^\d{5}(?:[-\s]\d{4})?$/    
-const $zipSpan = $('<span class="validate">PLease enter valid zipcode</span>');
-const $zipcodeInput = $('#zip');
 
-function zipcode() {
+
+function zipcode() { //zipcode validation
 
     if (!(zipRegex.test($('#zip').val()))) {
 
@@ -295,16 +319,17 @@ function zipcode() {
 
 }
 
-const cvvRegex = /^\d{3}$/;
-const $cvvSpan = $('<span class="validate">Please enter valid cvv number</span>');
-const $cvvInput = $('#cvv');
+
 $cvvSpan.css('color', 'red');
-function cvv() {
+
+function cvv() { //cv validation
 
     if (!(cvvRegex.test($('#cvv').val()))) {
 
-        $cvvSpan.css('color','red');
+        $cvvSpan.css('color', 'red');
         let $newCvvSpan = $($cvvInput).after($cvvSpan);
+    
+       
         return false;
 
 
@@ -323,7 +348,7 @@ function creditCardVal() { //validating credit card inputs
     $('#cc-num').keyup(function () {
 
         creditCardNum();
-       
+
 
 
     })
@@ -344,7 +369,7 @@ creditCardVal();
 
 
 
-$('form').submit(function (e) {
+$('form').submit(function (e) { //submit form function, prevents default actions
 
     if (name() === false) {
         e.preventDefault();
@@ -361,8 +386,7 @@ $('form').submit(function (e) {
         e.preventDefault();
 
 
-    }
-    else if ($('#payment').val() === 'Credit Card') {
+    } else if ($('#payment').val() === 'Credit Card') {
         if (creditCardNum() === false) {
 
             e.preventDefault();

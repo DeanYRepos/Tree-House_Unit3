@@ -235,7 +235,7 @@ function activity() {
 
     if (activityCostTotal === 0) {
         let $newActivitySpan = $($newDiv).before($activitySpan);
-        $newActivitySpan.css('color', 'red');
+        $activitySpan.css('color', 'red');
         $activityClass.css('color', 'red');
 
 
@@ -245,7 +245,7 @@ function activity() {
     } else {
 
         $activityClass.css('color', 'black');
-        $ActivitySpan.attr('hidden', true)
+        $activitySpan.attr('hidden', true)
         return true;
     }
 

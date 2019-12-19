@@ -275,11 +275,7 @@ $secondCCSPan.css('color', 'red');
 
 function creditCardNum() { //credit card number validation
 
-    if (!(ccRegex.test($('#cc-num').val()))) {
-        $ccSpan.attr('hidden', false);
-        //$($creditCardInput).after($secondCCSPan);
-        $($creditCardInput).after($ccSpan);
-       // $secondCCSPan.attr('hidden', true);
+    
        
     
         if (!(ccRegex.test($('#cc-num').val())) ) {
@@ -292,7 +288,7 @@ function creditCardNum() { //credit card number validation
 
       }
 
-    }
+    
     
      else {
 
@@ -302,7 +298,7 @@ function creditCardNum() { //credit card number validation
 
 
     }
-    
+
 }
 
 
@@ -394,8 +390,10 @@ $('form').submit(function (e) { //submit form function, prevents default actions
     }
     if ($('#payment').val() === 'Credit Card') {
         if (creditCardNum() === false) {
-
+ 
             e.preventDefault();
+            $ccSpan.attr('hidden', false);
+            $($creditCardInput).after($ccSpan);
         }
 
 

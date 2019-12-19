@@ -54,7 +54,7 @@ $dropOption.change(function () { //event handler showing/hiding input field when
 })
 
 // T-Shirt
-$color.attr('hidden',true); //hides color options
+$color.attr('hidden', true); //hides color options
 
 $colorText.attr('value', 'color-text'); // setting value of attr
 
@@ -75,7 +75,7 @@ $colorOp.prop('hidden', true); //hides all color options except first option
 
 $design.change(function () { //event handler, listening for design selection, showing corresponding colors
     console.log(this);
-    $color.attr('hidden',false); //shows color options
+    $color.attr('hidden', false); //shows color options
 
     if ($(this).val() === 'js puns') { //conditional determning theme selected
 
@@ -271,33 +271,38 @@ function activity() { //activity validation
 
 
 $ccSpan.css('color', 'red');
-$secondCCSPan.css('color','red');
+$secondCCSPan.css('color', 'red');
 
 function creditCardNum() { //credit card number validation
 
     if (!(ccRegex.test($('#cc-num').val()))) {
         $ccSpan.attr('hidden', false);
-        let $newCCSpan = $($creditCardInput).after($ccSpan);
-        $secondCCSPan.attr('hidden',true);
+        //$($creditCardInput).after($secondCCSPan);
+        $($creditCardInput).after($ccSpan);
+       // $secondCCSPan.attr('hidden', true);
+       
+    
+        if (!(ccRegex.test($('#cc-num').val())) ) {
 
-if  ((ccRegex.test($('#cc-num').val())) < 13 || (ccRegex.test($('#cc-num').val())) > 16 ){
+            $($creditCardInput).after($secondCCSPan);
+            $secondCCSPan.attr('hidden', false);
+            $ccSpan.attr('hidden', true);
+ 
+            return false;
 
-         $($creditCardInput).after($secondCCSPan);
-$secondCCSPan.attr('hidden',false);
-$ccSpan.attr('hidden', true);
-}
+      }
 
-        return false;
-
-    } else {
+    }
+    
+     else {
 
         $ccSpan.attr('hidden', true);
-$secondCCSPan.attr('hidden',true);
+        $secondCCSPan.attr('hidden', true);
         return true;
 
 
     }
-
+    
 }
 
 
@@ -322,14 +327,14 @@ function zipcode() { //zipcode validation
 
 $cvvSpan.css('color', 'red');
 
-function cvv() { //cv validation
+function cvv() { //cvv validation
 
     if (!(cvvRegex.test($('#cvv').val()))) {
 
         $cvvSpan.css('color', 'red');
         let $newCvvSpan = $($cvvInput).after($cvvSpan);
-    
-       
+
+
         return false;
 
 
@@ -348,7 +353,7 @@ function creditCardVal() { //validating credit card inputs
     $('#cc-num').keyup(function () {
 
         creditCardNum();
-
+       
 
 
     })
@@ -386,7 +391,8 @@ $('form').submit(function (e) { //submit form function, prevents default actions
         e.preventDefault();
 
 
-    } else if ($('#payment').val() === 'Credit Card') {
+    }
+    if ($('#payment').val() === 'Credit Card') {
         if (creditCardNum() === false) {
 
             e.preventDefault();

@@ -7,7 +7,7 @@ class Game {
         this.missed = 0;
         this.phrases = this.createPhrases(); //method passed into phrases property
 
-        this.activePhrase = null;
+        this.activePhrase =null;
 
     }
     /*Method that creates array of phrases */
@@ -50,4 +50,25 @@ getRandomPhrase(){
     return this.createPhrases()[randomNumber];
 
 }
-};
+
+startGame(){
+
+
+let overlay = document.getElementById('overlay');
+overlay.style.visibility = 'hidden';
+let phrase = new Phrase(this.getRandomPhrase);
+this.activePhrase = this.getRandomPhrase;
+this.activePhrase.addPhraseToDisplay();
+
+
+
+
+
+
+
+
+
+
+}
+
+};  

@@ -390,7 +390,7 @@ $('form').submit(function (e) { //submit form function, prevents default actions
     }
     if ($('#payment').val() === 'Credit Card') {
         if (creditCardNum() === false) {
- 
+            
             e.preventDefault();
             $ccSpan.attr('hidden', false);
             $($creditCardInput).after($ccSpan);

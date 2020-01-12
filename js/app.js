@@ -43,10 +43,22 @@
 // const phrase = new Phrase (randomPhrase.phrase);
 
 
-// phrase.addPhraseToDisplay();
-// console.log(addPhraseToDisplay());
 
-const game = new Game();
+// const game = new Game();
+// game.startGame();
+
+// console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
+
+let game; 
+const button = document.getElementById('btn__reset');
+
+
+button.addEventListener('click', () => { //eventlistener activates new game when start button is clicked
+
+game = new Game ();
 game.startGame();
 
-console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
+
+})
+
+

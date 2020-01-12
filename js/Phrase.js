@@ -19,7 +19,7 @@ class Phrase {
 
             if (displayPhrase[i].match(regex)) {
                 let li = document.createElement('li');
-                li.className = 'hide letter' + displayPhrase[i] ;
+                li.classList.add('hide', 'letter');
                 li.innerText = displayPhrase[i];
                 phraseUl.appendChild(li);
 
@@ -38,5 +38,29 @@ class Phrase {
 
 
     }
+    checkLetter(letter) {
 
+        return this.phrase.includes(letter); //returns true is letter is included in phrase, false if not included
+
+    }
+
+
+    showMatchedLetter(letter) {
+
+        let letterMatch = document.getElementsByClassName('letter');
+        for (let i = 0; i < letterMatch.length; i++) {
+
+            if (letterMatch[i].innerHTML === letter) {
+
+
+                letterMatch[i].classList.remove('hide', 'letter');
+                letterMatch[i].classList.add('show', 'letter');
+
+
+
+            }
+
+        }
+        return letterMatch;
+    }
 };
